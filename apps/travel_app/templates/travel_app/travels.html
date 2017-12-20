@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link href="{% static 'travel_app/style.css' %}" rel="stylesheet" type="text/css" media="screen" />
+    <title>Document</title>
+</head>
+<body>
+    <a href="/">Logout</a>
+    <h1>Hello {{request.session.username}}!</h1>
+    <h3>Your trip schedules</h3>
+    <fieldset>
+    <table class="plan">
+        <thead>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End date</th>
+            <th>Plan</th>
+        </thead>
+        <tbody>     
+        {% for plans in plans %}
+        <tr>
+            <td><a href='/plan/{{plans.id}}'>{{plans.destination}}</a></td>
+            <td>{{plans.travel_date_from}}</td>
+            <td>{{plans.travel_date_to}}</td>
+            <td>{{plans.description}}</td>
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    </fieldset>
+    <h3>Other User's Travel Plans</h3>
+    <fieldset>
+    <table class="all_plans">
+            <thead>
+                <th>Name</th>
+                <th>Destination</th>
+                <th>Travel Start Date</th>
+                <th>Travel End date</th>
+                <th>Description</th>
+                <th>Do you want to join?</th>
+            </thead>
+            <tbody> 
+            {% for plans in allplans %}
+                <tr>
+                    <td>{{plans.planned_by.name}}</td>
+                    <td>{{plans.destination}}</td>
+                    <td>{{plans.travel_date_from}}</td>
+                    <td>{{plans.travel_date_to}}</td>
+                    <td>{{plans.description}}</td>
+                    <td><a href="/join/{{plans.id}}">JOIN</a></td>
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </fieldset>
+    <a href="/plan_create">Add a travel Plan</a>
+</body>
+</html>

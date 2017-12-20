@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link href="{% static 'travel_app/style.css' %}" rel="stylesheet" type="text/css" media="screen" />
+    <title>Document</title>
+</head>
+<body>
+    <a href="/home">Home</a><br><a href="/">Logout</a>
+    <h1>{{plans.destination}}</h1>
+    <h3>planned by:{{plans.planned_by.name}}</h3>
+    <h3>Description:{{plans.description}}</h3>
+    <h3>travel date from:{{plans.travel_date_from}}</h3>
+    <h3>travel date to:{{plans.travel_date_to}}</h3>
+    <br>
+    <h1>Other users Joining the trip:</h1>
+    {%for users in user%}
+        <h3>{{users.name}}</h3>
+    {%endfor%}
+
+</body>
+</html>
